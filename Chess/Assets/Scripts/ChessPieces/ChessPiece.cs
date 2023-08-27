@@ -14,10 +14,13 @@ public class ChessPiece : MonoBehaviour
     private Vector3 desiredPostion;
     private Vector3 desiredScale = Vector3.one;
 
+    private void Awake(){
+        desiredScale = transform.localScale;
+    }
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, desiredPostion, Time.deltaTime * 10);
-        //transform.localScale = Vector3.Lerp(transform.localScale, desiredPostion, Time.deltaTime * 10);
+        transform.position = Vector3.Lerp(transform.position, desiredPostion, Time.deltaTime * 5);
+        transform.localScale = Vector3.Lerp(transform.localScale, desiredScale, Time.deltaTime * 5);
     }
     public virtual void SetPosition(Vector3 position, bool force = false) { 
         desiredPostion = position;
