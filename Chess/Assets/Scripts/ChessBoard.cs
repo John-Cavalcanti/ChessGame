@@ -152,7 +152,7 @@ public class ChessBoard : MonoBehaviour
         }
 
     }
-        private ChessPiece SpawningSinglePiece(ChessPieceType type, int team)
+    private ChessPiece SpawningSinglePiece(ChessPieceType type, int team)
     {
         ChessPiece cp = Instantiate(prefabs[(int)type-1],transform).GetComponent<ChessPiece>();
 
@@ -172,12 +172,14 @@ public class ChessBoard : MonoBehaviour
             {
                 if (chessPieces[x,y] != null)
                 {
+                    // **Single
                     PositionSiglePieces(x, y, true);
                 }
             }
         }
     }
 
+    // PositionSingle***
     private void PositionSiglePieces(int x,int y, bool force=false)
     {
         chessPieces[x, y].currentX = x;
