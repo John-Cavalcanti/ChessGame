@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.79565066, g: 0.77713513, b: 0.79267836, a: 1}
+  m_IndirectSpecularColor: {r: 0.7956502, g: 0.77713495, b: 0.79267776, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -158,6 +158,9 @@ MonoBehaviour:
   tileSize: 0.675
   yOffset: 0.21
   boardCenter: {x: 0, y: 0, z: 0}
+  deathSize: 0.3
+  deathSpacing: 0.3
+  dragOffset: 0.75
   prefabs:
   - {fileID: 6727354689955465643, guid: a8453612d869ce24cb5cb15756f4c9b8, type: 3}
   - {fileID: 4525880623134771835, guid: 0ac91ca561e25cf489badfea3fc26ea7, type: 3}
