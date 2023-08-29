@@ -22,7 +22,9 @@ public class ChessPiece : MonoBehaviour
     private Vector3 desiredScale = Vector3.one;
 
     private void Awake(){
+        transform.rotation = Quaternion.Euler((team == 0) ? new Vector3(-90,0,90) : new Vector3(-90,0,-90));
         desiredScale = transform.localScale;
+        
     }
     private void Update()
     {
