@@ -34,9 +34,17 @@ public class Pawn : ChessPiece
         return r;
     }
 
+    
     public override SpecialMove GetSpecialMoves(ref ChessPiece[,] board, ref List<Vector2Int[]> moveList, ref List<Vector2Int> availableMoves)
     {
         int direction = (team == 1) ? 1 : -1;
+
+        // MUDANÇA
+        // Verificação se o peão chegou na ultima casa do tabuleiro para ambos os lados
+        // Retorno será usado no Script ChessBoard a partir da linha 380
+        if ((team == 1 && currentY == 6) || (team == 0 && currentY == 1))
+            return SpecialMove.Promotion;
+
         // En Passsant
         if(moveList.Count > 0)
         {
