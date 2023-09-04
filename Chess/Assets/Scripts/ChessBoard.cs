@@ -377,35 +377,45 @@ public class ChessBoard : MonoBehaviour
             }
         }
 
+        // MUDANÇA
+        // Esse codigo é chamado nos scripts do rei e do Peão
+        // PROMOÇÃO
         if (specialMove == SpecialMove.Promotion)
         {
+            //Verifica o ultimo movimento feito pelo peão para verificar se ele esta na casa certae qual o peão que realizou o movimento
             Vector2Int[] lastMove = moveList[moveList.Count - 1];  
             ChessPiece targetPawn = chessPieces[lastMove[1].x, lastMove[1].y];
 
+            // Caso a peça seja um peão
             if (targetPawn.type == ChessPieceType.Pawn)
-            {
+            {   
+                // time Branco
                 if (targetPawn.team == 1 && lastMove[1].y == 7)
                 {
-                    ChessPiece newQueen = SpawningSinglePiece(ChessPieceType.Queen, 1);
-                    newQueen.transform.position = chessPieces[lastMove[1].x, lastMove[1].y].transform.position;
-                    Destroy(chessPieces[lastMove[1].x, lastMove[1].y].gameObject);
-                    chessPieces[lastMove[1].x, lastMove[1].y] = newQueen;
-                    PositionSiglePieces(lastMove[1].x, lastMove[1].y);
+                    ChessPiece newQueen = SpawningSinglePiece(ChessPieceType.Queen, 1); // Cria uma rainha do time Branco
+                    newQueen.transform.position = chessPieces[lastMove[1].x, lastMove[1].y].transform.position; // Põe a rainha criada na posiçao que o peão estava
+                    Destroy(chessPieces[lastMove[1].x, lastMove[1].y].gameObject); // Destroi o peão que estava na casa 
+                    chessPieces[lastMove[1].x, lastMove[1].y] = newQueen; // Adiciona a nova rainha na lista de peças
+                    PositionSiglePieces(lastMove[1].x, lastMove[1].y); // Adiciona a nova posição da rainha
                 }
+                // Time Preto
                 if (targetPawn.team == 0 && lastMove[1].y == 0)
                 {
-                    ChessPiece newQueen = SpawningSinglePiece(ChessPieceType.Queen, 0);
-                    newQueen.transform.position = chessPieces[lastMove[1].x, lastMove[1].y].transform.position;
-                    Destroy(chessPieces[lastMove[1].x, lastMove[1].y].gameObject);
-                    chessPieces[lastMove[1].x, lastMove[1].y] = newQueen;
-                    PositionSiglePieces(lastMove[1].x, lastMove[1].y);
+                    ChessPiece newQueen = SpawningSinglePiece(ChessPieceType.Queen, 0); // Cria uma rainha do time Branco
+                    newQueen.transform.position = chessPieces[lastMove[1].x, lastMove[1].y].transform.position; // Põe a rainha criada na posiçao que o peão estava
+                    Destroy(chessPieces[lastMove[1].x, lastMove[1].y].gameObject); // Destroi o peão que estava na casa 
+                    chessPieces[lastMove[1].x, lastMove[1].y] = newQueen; // Adiciona a nova rainha na lista de peças
+                    PositionSiglePieces(lastMove[1].x, lastMove[1].y); // Adiciona a nova posição da rainha
                 }
             }
 
         }
 
+        // MOVIMENTA A TORRE PARA O MOVIMENTO ESPECIAL DO REI
+        // verifica se o movimento do especial é o do rei
         if (specialMove == SpecialMove.Castling)
         {
+            // Pega o ultimo movimento feito
             Vector2Int[] lastMove = moveList[moveList.Count - 1];
 
             // Right Rook
@@ -414,6 +424,7 @@ public class ChessBoard : MonoBehaviour
                 // Black team
                 if (lastMove[1].y == 0)
                 {
+                    // Move a torre para o Local relativo da jogada especial
                     ChessPiece rook = chessPieces[0, 0];
                     chessPieces[2, 0] = rook;
                     PositionSiglePieces(2, 0);
@@ -422,6 +433,7 @@ public class ChessBoard : MonoBehaviour
                 // White team
                 } else if (lastMove[1].y == 7) 
                 {
+                    // Move a torre para o Local relativo da jogada especial
                     ChessPiece rook = chessPieces[0, 7];
                     chessPieces[2, 7] = rook;
                     PositionSiglePieces(2, 7);
@@ -432,6 +444,7 @@ public class ChessBoard : MonoBehaviour
                 // Black team
                 if (lastMove[1].y == 0)
                 {
+                    // Move a torre para o Local relativo da jogada especial
                     ChessPiece rook = chessPieces[7, 0];
                     chessPieces[4, 0] = rook;
                     PositionSiglePieces(4, 0);
@@ -441,6 +454,7 @@ public class ChessBoard : MonoBehaviour
                 }
                 else if (lastMove[1].y == 7)
                 {
+                    // Move a torre para o Local relativo da jogada especial
                     ChessPiece rook = chessPieces[7, 7];
                     chessPieces[4, 7] = rook;
                     PositionSiglePieces(4, 7);
