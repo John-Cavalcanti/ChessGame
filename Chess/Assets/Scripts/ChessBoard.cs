@@ -376,7 +376,82 @@ public class ChessBoard : MonoBehaviour
                 }
             }
         }
+
+        if (specialMove == SpecialMove.Promotion)
+        {
+            Vector2Int[] lastMove = moveList[moveList.Count - 1];  
+            ChessPiece targetPawn = chessPieces[lastMove[1].x, lastMove[1].y];
+
+            if (targetPawn.type == ChessPieceType.Pawn)
+            {
+                if (targetPawn.team == 1 && lastMove[1].y == 7)
+                {
+                    ChessPiece newQueen = SpawningSinglePiece(ChessPieceType.Queen, 1);
+                    newQueen.transform.position = chessPieces[lastMove[1].x, lastMove[1].y].transform.position;
+                    Destroy(chessPieces[lastMove[1].x, lastMove[1].y].gameObject);
+                    chessPieces[lastMove[1].x, lastMove[1].y] = newQueen;
+                    PositionSiglePieces(lastMove[1].x, lastMove[1].y);
+                }
+                if (targetPawn.team == 0 && lastMove[1].y == 0)
+                {
+                    ChessPiece newQueen = SpawningSinglePiece(ChessPieceType.Queen, 0);
+                    newQueen.transform.position = chessPieces[lastMove[1].x, lastMove[1].y].transform.position;
+                    Destroy(chessPieces[lastMove[1].x, lastMove[1].y].gameObject);
+                    chessPieces[lastMove[1].x, lastMove[1].y] = newQueen;
+                    PositionSiglePieces(lastMove[1].x, lastMove[1].y);
+                }
+            }
+
+        }
+
+        if (specialMove == SpecialMove.Castling)
+        {
+            Vector2Int[] lastMove = moveList[moveList.Count - 1];
+
+            // Right Rook
+            if (lastMove[1].x == 1)
+            {
+                // Black team
+                if (lastMove[1].y == 0)
+                {
+                    ChessPiece rook = chessPieces[0, 0];
+                    chessPieces[2, 0] = rook;
+                    PositionSiglePieces(2, 0);
+                    chessPieces[0, 0] = null;
+                
+                // White team
+                } else if (lastMove[1].y == 7) 
+                {
+                    ChessPiece rook = chessPieces[0, 7];
+                    chessPieces[2, 7] = rook;
+                    PositionSiglePieces(2, 7);
+                    chessPieces[0, 7] = null;
+                }
+            } else if (lastMove[1].x == 5)
+            {
+                // Black team
+                if (lastMove[1].y == 0)
+                {
+                    ChessPiece rook = chessPieces[7, 0];
+                    chessPieces[4, 0] = rook;
+                    PositionSiglePieces(4, 0);
+                    chessPieces[7, 0] = null;
+
+                    // White team
+                }
+                else if (lastMove[1].y == 7)
+                {
+                    ChessPiece rook = chessPieces[7, 7];
+                    chessPieces[4, 7] = rook;
+                    PositionSiglePieces(4, 7);
+                    chessPieces[7, 7] = null;
+                }
+            }
+        }
+
     }
+
+
 
     // Operations
     private bool ContainsValidMove(ref List<Vector2Int> moves, Vector2Int pos)
