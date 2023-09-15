@@ -46,8 +46,19 @@ public class ChessBoard : MonoBehaviour
     private Vector3 bounds;
     private bool isWhiteTurn;
 
+    private bool firstTurn = true;
+
     private SpecialMove specialMove;
     private List<Vector2Int[]> moveList = new List<Vector2Int[]>();
+
+    private Quaternion initialAngleCamera = Quaternion.Euler(113f,0f,180f);
+    private Vector3 whiteTeamCameraPos = new Vector3(0f, 6.05f, 3.0f);
+    private Quaternion whiteTeamCameraRot = Quaternion.Euler(113f,0f,180f);
+
+    private Vector3 blackTeamCameraPos = new Vector3(0f, 6.05f, -3.0f);
+    private Quaternion blackTeamCameraRot = Quaternion.Euler(113f,180f,180f);
+
+
     private void Awake()
     {
         isWhiteTurn = true;
@@ -55,6 +66,9 @@ public class ChessBoard : MonoBehaviour
         generateAllTiles(tileSize, TILE_COUNT_X, TILE_COUNT_Y);
         SpawnAllPieces();
         PositionAllPieces();
+
+        // seta a camera em seu posicionamento inicial que devem ser as coordenadas do time branco
+        Camera.main.transform.rotation = initialAngleCamera;
     }
     private void Update()
     {
@@ -63,6 +77,26 @@ public class ChessBoard : MonoBehaviour
             currentCamera = Camera.main;
             return;
         }
+
+        // fazer altereacoes de camera aqui
+        // camera white team 
+        // coordinates x = 0 , y = 6.05, z = 3
+        
+
+        // esta condicional altera a camera dependendo de qual time pertence a jogada do turno atual
+        if (!firstTurn)
+        {
+            int transformCoeficient = 3;
+            if(isWhiteTurn)
+            {
+                currentCamera.transform.position = Vector3.Lerp(currentCamera.transform.position, whiteTeamCameraPos, Time.deltaTime * transformCoeficient);
+                currentCamera.transform.rotation = Quaternion.LerpUnclamped(currentCamera.transform.rotation, whiteTeamCameraRot, Time.deltaTime * transformCoeficient);
+            }else{
+                currentCamera.transform.position = Vector3.Lerp(currentCamera.transform.position, blackTeamCameraPos, Time.deltaTime * transformCoeficient);
+                currentCamera.transform.rotation = Quaternion.LerpUnclamped(currentCamera.transform.rotation, blackTeamCameraRot, Time.deltaTime * transformCoeficient);
+            }
+        }
+        
 
         RaycastHit info;
         Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
@@ -690,6 +724,7 @@ public class ChessBoard : MonoBehaviour
 
         PositionSiglePieces(x, y);
 
+        firstTurn = false;
         isWhiteTurn = !isWhiteTurn;
         moveList.Add(new Vector2Int[] { previousPosition, new Vector2Int(x,y)});
 
