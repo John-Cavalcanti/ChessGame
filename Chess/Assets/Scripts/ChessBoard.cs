@@ -23,6 +23,7 @@ public class ChessBoard : MonoBehaviour
     [SerializeField] private float deathSpacing = 0.3f;
     [SerializeField] private float dragOffset = 0.75f;
     [SerializeField] private GameObject VictoryScreen;
+    
 
 
     [Header("Prefabs && Materials")]
