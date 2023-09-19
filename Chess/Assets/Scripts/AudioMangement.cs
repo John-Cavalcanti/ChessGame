@@ -7,20 +7,13 @@ public class AudioMangement : MonoBehaviour
     private AudioSource backGroundMusicAudioSource;
     
     public AudioClip backGroundMusic;
+    private bool changingBetweenSongs = false;
 
     private void Awake()
     {
-        backGroundMusicAudioSource = gameObject.AddComponent<AudioSource>();
-        
-        backGroundMusic = Resources.Load<AudioClip>("Audios/pianomoment");
-        
-        backGroundMusicAudioSource.clip = backGroundMusic;
-
-        backGroundMusicAudioSource.Play();
     }
     private void Start()
-    {
-        // irei remover essa musica tocando aqui para criar a logica toda no script ChessBoard        
+    {   
     }
 
     // Update is called once per frame
@@ -32,6 +25,15 @@ public class AudioMangement : MonoBehaviour
     public string getBackgroundMusicName()
     {
         return backGroundMusicAudioSource.clip.name;
+    }
+
+    public bool getChangingBetweenSongs()
+    {
+        return changingBetweenSongs;
+    }
+    public void setChangingBetweenSongs(bool value)
+    {
+        this.changingBetweenSongs = value;
     }
 
     public void decreaseBackgroundMusicVolume()
@@ -66,19 +68,50 @@ public class AudioMangement : MonoBehaviour
         backGroundMusicAudioSource.UnPause();
     }
 
-    public void changeBackgroundMusic(string songName)
-    { 
+    public IEnumerator changeBackgroundMusic(string songName)
+    {
         string path = "Audios/" + songName;
+        float startVolume = backGroundMusicAudioSource.volume;
+        float timer = 0f;
+        float fadeTime = 5f;
+
+        while (timer < fadeTime)
+        {
+            timer += Time.deltaTime;
+            backGroundMusicAudioSource.volume = Mathf.Lerp(startVolume, 0f, timer / fadeTime);
+            yield return null;
+        }
+
+        backGroundMusicAudioSource.volume = 0f;
 
         stopBackgroundMusic();
-        backGroundMusic = Resources.Load<AudioClip>(path);
-        playBackgroundMusic(backGroundMusic);
+        //backGroundMusic = Resources.Load<AudioClip>(path);
+        playBackgroundMusic(path);
+
+        timer = 0f;
+        while (timer < fadeTime)
+        {
+            timer += Time.deltaTime;
+            backGroundMusicAudioSource.volume = Mathf.Lerp(0f, 1f, timer / fadeTime);
+            yield return null;
+        }
+
+        backGroundMusicAudioSource.volume = 1f;
+        
+        setChangingBetweenSongs(false);
     }
 
     
-    public void playBackgroundMusic(AudioClip audiosource)
+    public void playBackgroundMusic(string path)
     {
-        backGroundMusicAudioSource.clip = audiosource;
+        if (backGroundMusicAudioSource == null)
+        {
+            backGroundMusicAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        
+        backGroundMusic = Resources.Load<AudioClip>(path);
+        
+        backGroundMusicAudioSource.clip = backGroundMusic;
         backGroundMusicAudioSource.Play();
     }
 }

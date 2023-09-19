@@ -38,12 +38,17 @@ public class ChessBoard : MonoBehaviour
     private List<ChessPiece> deadWhites = new List<ChessPiece>();
     private List<ChessPiece> deadBlacks = new List<ChessPiece>();
 
+    // Variaveis par resetar ao fim de jogo, por precaução
+    
+    // O jogo sempre comeca no turno 1 
+    private int numberOfCurrentPlay = 1;
     private int numberOfDeadPieces = 0;
     
     private const int TILE_COUNT_X = 8;
     private const int TILE_COUNT_Y = 8;
 
-    private string[] songNames = {"pianomoment","badass"};
+    //                              inicio        meio      fim      posfim
+    private string[] songNames = {"pianomoment","newdawn","theduel","badass"};
     private GameObject[,] tiles;
     private Camera currentCamera;
 
@@ -52,16 +57,12 @@ public class ChessBoard : MonoBehaviour
     private Vector2Int currentHover;
     private Vector3 bounds;
     private bool isWhiteTurn;
-
     private bool firstTurn = true;
-
     private SpecialMove specialMove;
     private List<Vector2Int[]> moveList = new List<Vector2Int[]>();
-
     private Quaternion initialAngleCamera = Quaternion.Euler(113f,0f,180f);
     private Vector3 whiteTeamCameraPos = new Vector3(0f, 6.05f, 3.0f);
     private Quaternion whiteTeamCameraRot = Quaternion.Euler(113f,0f,180f);
-
     private Vector3 blackTeamCameraPos = new Vector3(0f, 6.05f, -3.0f);
     private Quaternion blackTeamCameraRot = Quaternion.Euler(113f,180f,180f);
 
@@ -76,6 +77,21 @@ public class ChessBoard : MonoBehaviour
 
         // seta a camera em seu posicionamento inicial que devem ser as coordenadas do time branco
         Camera.main.transform.rotation = initialAngleCamera;
+
+
+        if(audioManager == null)
+        {
+            audioManager = FindObjectOfType<AudioMangement>();
+            if(audioManager == null)
+            {
+                Debug.Log("audioManager nulo");
+            }
+        }
+
+        //string initialSongPath = "Audios/" + songNames[0];
+
+        audioManager.playBackgroundMusic("Audios/" + songNames[0]);
+
     }
     private void Update()
     {
@@ -86,16 +102,6 @@ public class ChessBoard : MonoBehaviour
             currentCamera = Camera.main;
             return;
         }
-
-        if(audioManager == null)
-        {
-            audioManager = FindObjectOfType<AudioMangement>();
-            if(audioManager == null)
-            {
-                Debug.Log("Bruh");
-            }
-        }
-
 
         // Fazer altereacoes de camera aqui
         // Camera white team coordinates:
@@ -201,14 +207,32 @@ public class ChessBoard : MonoBehaviour
         }
 
         // Fazendo alterações de música depois que a jogada termina em teoria
-        if(numberOfDeadPieces > 0)
+        // checagem de mid game após 12 jogadas
+        if(numberOfCurrentPlay > 2)
         {
+            //Debug.Log(numberOfCurrentPlay);
             string nameOfSong = audioManager.getBackgroundMusicName();
-            if (nameOfSong != songNames[1])
+
+            // checa se esta mudando entre musicas pois se estiver nao realiza nada ate terminar a transincao
+            if (!audioManager.getChangingBetweenSongs())
             {
-                Debug.Log(nameOfSong +" "+ songNames[1]);
-                audioManager.changeBackgroundMusic(songNames[1]);
-            }    
+                
+                // a primeira condicional serve para as alteracoes de fim de jogo
+                // enquanto a segunda condicional apenas checa para o mid game
+                if(deadBlacks.Count > 1 || deadWhites.Count > 1)
+                {
+                    if (nameOfSong != songNames[2])
+                    {
+                        audioManager.setChangingBetweenSongs(true);
+                        StartCoroutine(audioManager.changeBackgroundMusic(songNames[2]));
+                    }
+                }
+                else if (nameOfSong != songNames[1])
+                {
+                    audioManager.setChangingBetweenSongs(true);
+                    StartCoroutine(audioManager.changeBackgroundMusic(songNames[1]));
+                }
+            }
         }
     }
 
@@ -353,6 +377,8 @@ public class ChessBoard : MonoBehaviour
     {
         VictoryScreen.SetActive(true);
         VictoryScreen.transform.GetChild(winningTeam).gameObject.SetActive(true);
+        audioManager.setChangingBetweenSongs(true);
+        StartCoroutine(audioManager.changeBackgroundMusic(songNames[3]));
     }
 
     public void onResetButton()
@@ -762,6 +788,7 @@ public class ChessBoard : MonoBehaviour
 
         ProcessSpecialMove();
         numberOfDeadPieces = deadBlacks.Count + deadWhites.Count;
+        numberOfCurrentPlay += 1;
 
         if (CheckForCheckmate())
         {
@@ -783,25 +810,5 @@ public class ChessBoard : MonoBehaviour
 
         return -Vector2Int.one; // -1 -1
     }
-
-    // getters
-
-
-    // talvez esses 3 nao sejam necessarios
-    public List<Vector2Int[]> getMoveList()
-    {
-        return moveList;
-    }
-
-    public List<ChessPiece> getDeadWhiteList()
-    {
-        return deadWhites;
-    } 
-
-    public List<ChessPiece> getDeadBlackList()
-    {
-        return deadBlacks;
-    } 
-
 
 }
