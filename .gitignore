@@ -48,6 +48,8 @@ ExportedObj/
 *.VC.db
 *.fbx
 !*.fbx.meta
+*.mp3
+!*.mp3.meta
 
 # Unity3D generated meta files
 *.pidb.meta

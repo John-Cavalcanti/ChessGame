@@ -37,11 +37,18 @@ public class ChessBoard : MonoBehaviour
     private List<Vector2Int> availableMoves = new List<Vector2Int>();
     private List<ChessPiece> deadWhites = new List<ChessPiece>();
     private List<ChessPiece> deadBlacks = new List<ChessPiece>();
+
+    private int numberOfDeadPieces = 0;
     
     private const int TILE_COUNT_X = 8;
     private const int TILE_COUNT_Y = 8;
+
+    private string[] songNames = {"pianomoment","badass"};
     private GameObject[,] tiles;
     private Camera currentCamera;
+
+    // sim escrevi errado e fiquei com preguica de renomear :D
+    private AudioMangement audioManager;
     private Vector2Int currentHover;
     private Vector3 bounds;
     private bool isWhiteTurn;
@@ -72,18 +79,32 @@ public class ChessBoard : MonoBehaviour
     }
     private void Update()
     {
+        // instanciando elementos
+
         if (!currentCamera)
         {
             currentCamera = Camera.main;
             return;
         }
 
-        // fazer altereacoes de camera aqui
-        // camera white team 
-        // coordinates x = 0 , y = 6.05, z = 3
+        if(audioManager == null)
+        {
+            audioManager = FindObjectOfType<AudioMangement>();
+            if(audioManager == null)
+            {
+                Debug.Log("Bruh");
+            }
+        }
+
+
+        // Fazer altereacoes de camera aqui
+        // Camera white team coordinates:
+        // x = 0 , y = 6.05, z = 3
+        // Usando as coordenadas das peças brancas como base para alterar as cameras
         
 
         // esta condicional altera a camera dependendo de qual time pertence a jogada do turno atual
+        // falta adicionar condicional para quando for PvC de não alterar a câmera
         if (!firstTurn)
         {
             int transformCoeficient = 3;
@@ -96,7 +117,6 @@ public class ChessBoard : MonoBehaviour
                 currentCamera.transform.rotation = Quaternion.LerpUnclamped(currentCamera.transform.rotation, blackTeamCameraRot, Time.deltaTime * transformCoeficient);
             }
         }
-        
 
         RaycastHit info;
         Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
@@ -178,6 +198,17 @@ public class ChessBoard : MonoBehaviour
             float distance = 0.0f;
             if (horizontalPlane.Raycast(ray, out distance))
                 currentlyDragging.SetPosition(ray.GetPoint(distance) + Vector3.up * dragOffset);
+        }
+
+        // Fazendo alterações de música depois que a jogada termina em teoria
+        if(numberOfDeadPieces > 0)
+        {
+            string nameOfSong = audioManager.getBackgroundMusicName();
+            if (nameOfSong != songNames[1])
+            {
+                Debug.Log(nameOfSong +" "+ songNames[1]);
+                audioManager.changeBackgroundMusic(songNames[1]);
+            }    
         }
     }
 
@@ -724,11 +755,13 @@ public class ChessBoard : MonoBehaviour
 
         PositionSiglePieces(x, y);
 
+        
         firstTurn = false;
         isWhiteTurn = !isWhiteTurn;
         moveList.Add(new Vector2Int[] { previousPosition, new Vector2Int(x,y)});
 
         ProcessSpecialMove();
+        numberOfDeadPieces = deadBlacks.Count + deadWhites.Count;
 
         if (CheckForCheckmate())
         {
@@ -750,4 +783,25 @@ public class ChessBoard : MonoBehaviour
 
         return -Vector2Int.one; // -1 -1
     }
+
+    // getters
+
+
+    // talvez esses 3 nao sejam necessarios
+    public List<Vector2Int[]> getMoveList()
+    {
+        return moveList;
+    }
+
+    public List<ChessPiece> getDeadWhiteList()
+    {
+        return deadWhites;
+    } 
+
+    public List<ChessPiece> getDeadBlackList()
+    {
+        return deadBlacks;
+    } 
+
+
 }
