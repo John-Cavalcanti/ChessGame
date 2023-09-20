@@ -13,9 +13,31 @@ public class MenuManagemant : MonoBehaviour
     [SerializeField] private GameObject MainScreen;
     [SerializeField] private GameObject ModosScreen;
 
-    // MainScreen botões
+    private AudioMangement menuAudioManager;
+
+    private void awake()
+    {
+        if(menuAudioManager == null)
+        {
+            menuAudioManager = FindObjectOfType<AudioMangement>();
+            if(menuAudioManager == null)
+            {
+                Debug.Log("audioManager nulo");
+            }
+        }
+
+        menuAudioManager.playBackgroundMusic("Audios/slowmotion");
+        menuAudioManager.setBackgroundMusicVolume(0.2f);
+    }
+
+    // MainScreen botï¿½es
     public void Jogar()
     {
+        if(menuAudioManager != null)
+        {
+            menuAudioManager.stopBackgroundMusic();
+        }
+        
         SceneManager.LoadScene(NomeDoLevelDeJogo);
     }
 
@@ -31,7 +53,7 @@ public class MenuManagemant : MonoBehaviour
         Application.Quit();
     }
 
-    // Modos botões
+    // Modos botï¿½es
 
     public void onVoltarButton()
     {
