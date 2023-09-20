@@ -12,8 +12,6 @@ public class MenuManagemant : MonoBehaviour
     [SerializeField] private String NomeDoLevelDeJogo;
     [SerializeField] private GameObject MainScreen;
     [SerializeField] private GameObject ModosScreen;
-    [SerializeField] private GameObject OpcoesScreen;
-    [SerializeField] private GameObject PausaScreen;
 
     // MainScreen botões
     public void Jogar()
@@ -24,18 +22,8 @@ public class MenuManagemant : MonoBehaviour
     public void onModosButton()
     {
         ModosScreen.SetActive(true);
-        OpcoesScreen.SetActive(false);
         MainScreen.SetActive(false);
-        PausaScreen.SetActive(false);
 
-    }
-
-    public void onOpcoesButton()
-    {
-        ModosScreen.SetActive(false);
-        OpcoesScreen.SetActive(true);
-        MainScreen.SetActive(false);
-        PausaScreen.SetActive(false);
     }
 
     public void onExitButton()
@@ -48,8 +36,6 @@ public class MenuManagemant : MonoBehaviour
     public void onVoltarButton()
     {
         ModosScreen.SetActive(false);
-        OpcoesScreen.SetActive(false);
         MainScreen.SetActive(true);
-        PausaScreen.SetActive(false);
     }
 }

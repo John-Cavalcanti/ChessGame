@@ -93,6 +93,8 @@ public class ChessBoard : MonoBehaviour
 
         audioManager.playBackgroundMusic("Audios/" + songNames[0]);
 
+        
+
     }
     private void Update()
     {
