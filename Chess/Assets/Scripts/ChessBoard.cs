@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -44,6 +45,10 @@ public class ChessBoard : MonoBehaviour
     // O jogo sempre comeca no turno 1 
     private int numberOfCurrentPlay = 1;
     private int numberOfDeadPieces = 0;
+
+    private float colorLerpDuration = 5f;
+    private float colorLerpTimer = 0f;
+    private float colorLerpValue;
     
     private const int TILE_COUNT_X = 8;
     private const int TILE_COUNT_Y = 8;
@@ -224,15 +229,18 @@ public class ChessBoard : MonoBehaviour
             // checa se esta mudando entre musicas pois se estiver nao realiza nada ate terminar a transincao
             if (!audioManager.getChangingBetweenSongs())
             {
-                
+                Color desiredColor;
                 // a primeira condicional serve para as alteracoes de fim de jogo
                 // enquanto a segunda condicional apenas checa para o mid game
                 if(deadBlacks.Count > 1 || deadWhites.Count > 1)
                 {
                     if (nameOfSong != songNames[2])
                     {   
-                        // rgb 180, 86 ,84
-                        mainDirectionalLight.color = new Color(180f / 255f,86f / 255f,84f / 255f);
+                        // refatorar proximos codigos de mudanca de cor pois se repete e pode ser feito em um metodo
+                        desiredColor = new Color(180f / 255f,86f / 255f,84f / 255f);
+                        // mainDirectionalLight.color = Color.Lerp(currentColor, desiredColor, colorLerpValue);
+                        // = desiredColor;
+                        StartCoroutine(changingColors(desiredColor));
                         audioManager.setChangingBetweenSongs(true);
                         StartCoroutine(audioManager.changeBackgroundMusic(songNames[2]));
                     }
@@ -240,12 +248,32 @@ public class ChessBoard : MonoBehaviour
                 else if (nameOfSong != songNames[1])
                 {
                     // rgb 121, 139, 190
-                    mainDirectionalLight.color = new Color(121f / 255f,139f / 255f,190f / 255f);
+                    //colorLerpTimer += Time.deltaTime;
+                    //colorLerpValue = Mathf.Clamp01(colorLerpTimer / colorLerpDuration);
+                    desiredColor = new Color(121f / 255f,139f / 255f,190f / 255f);
+                    //mainDirectionalLight.color = Color.Lerp(currentColor, desiredColor, colorLerpValue);
+                    StartCoroutine(changingColors(desiredColor));
                     audioManager.setChangingBetweenSongs(true);
                     StartCoroutine(audioManager.changeBackgroundMusic(songNames[1]));
                 }
             }
         }
+    }
+
+    private IEnumerator changingColors(Color colorToChange)
+    {
+        Color currentColor = mainDirectionalLight.color;
+        colorLerpTimer = 0f;
+
+        while(colorLerpTimer < colorLerpDuration)
+        {
+            colorLerpTimer += Time.deltaTime;
+            colorLerpValue = Mathf.Clamp01(colorLerpTimer / colorLerpDuration);
+            mainDirectionalLight.color = Color.Lerp(currentColor, colorToChange, colorLerpValue);
+            yield return null;
+        }
+
+        mainDirectionalLight.color = colorToChange;
     }
 
     // Generate the Board
