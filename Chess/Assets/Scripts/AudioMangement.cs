@@ -107,6 +107,7 @@ public class AudioMangement : MonoBehaviour
         if (backGroundMusicAudioSource == null)
         {
             backGroundMusicAudioSource = gameObject.AddComponent<AudioSource>();
+            backGroundMusicAudioSource.loop = true;
         }
         
         backGroundMusic = Resources.Load<AudioClip>(path);

@@ -81,6 +81,7 @@ public class ChessBoard : MonoBehaviour
         Camera.main.transform.rotation = initialAngleCamera;
 
         mainDirectionalLight = FindObjectOfType<Light>();
+        mainDirectionalLight.intensity = 1.7f;
 
         // inicializando o manager de audio
         if(audioManager == null)
@@ -215,7 +216,7 @@ public class ChessBoard : MonoBehaviour
 
         // Fazendo alterações de música depois que a jogada termina em teoria
         // checagem de mid game após 12 jogadas
-        if(numberOfCurrentPlay > 12)
+        if(numberOfCurrentPlay > 2)
         {
             //Debug.Log(numberOfCurrentPlay);
             string nameOfSong = audioManager.getBackgroundMusicName();
@@ -226,7 +227,7 @@ public class ChessBoard : MonoBehaviour
                 
                 // a primeira condicional serve para as alteracoes de fim de jogo
                 // enquanto a segunda condicional apenas checa para o mid game
-                if(deadBlacks.Count > 9 || deadWhites.Count > 9)
+                if(deadBlacks.Count > 1 || deadWhites.Count > 1)
                 {
                     if (nameOfSong != songNames[2])
                     {   
