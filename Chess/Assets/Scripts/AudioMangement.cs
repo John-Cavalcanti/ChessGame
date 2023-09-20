@@ -92,11 +92,11 @@ public class AudioMangement : MonoBehaviour
         while (timer < fadeTime)
         {
             timer += Time.deltaTime;
-            backGroundMusicAudioSource.volume = Mathf.Lerp(0f, 1f, timer / fadeTime);
+            backGroundMusicAudioSource.volume = Mathf.Lerp(0f, startVolume, timer / fadeTime);
             yield return null;
         }
 
-        backGroundMusicAudioSource.volume = 1f;
+        backGroundMusicAudioSource.volume = startVolume;
         
         setChangingBetweenSongs(false);
     }

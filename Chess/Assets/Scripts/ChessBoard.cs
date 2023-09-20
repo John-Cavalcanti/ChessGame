@@ -55,6 +55,7 @@ public class ChessBoard : MonoBehaviour
 
     // sim escrevi errado e fiquei com preguica de renomear :D
     private AudioMangement audioManager;
+    private Light mainDirectionalLight;
     private Vector2Int currentHover;
     private Vector3 bounds;
     private bool isWhiteTurn;
@@ -79,7 +80,9 @@ public class ChessBoard : MonoBehaviour
         // seta a camera em seu posicionamento inicial que devem ser as coordenadas do time branco
         Camera.main.transform.rotation = initialAngleCamera;
 
+        mainDirectionalLight = FindObjectOfType<Light>();
 
+        // inicializando o manager de audio
         if(audioManager == null)
         {
             audioManager = FindObjectOfType<AudioMangement>();
@@ -92,6 +95,7 @@ public class ChessBoard : MonoBehaviour
         //string initialSongPath = "Audios/" + songNames[0];
 
         audioManager.playBackgroundMusic("Audios/" + songNames[0]);
+        audioManager.setBackgroundMusicVolume(0.2f);
 
         
 
@@ -225,13 +229,17 @@ public class ChessBoard : MonoBehaviour
                 if(deadBlacks.Count > 9 || deadWhites.Count > 9)
                 {
                     if (nameOfSong != songNames[2])
-                    {
+                    {   
+                        // rgb 180, 86 ,84
+                        mainDirectionalLight.color = new Color(180f / 255f,86f / 255f,84f / 255f);
                         audioManager.setChangingBetweenSongs(true);
                         StartCoroutine(audioManager.changeBackgroundMusic(songNames[2]));
                     }
                 }
                 else if (nameOfSong != songNames[1])
                 {
+                    // rgb 121, 139, 190
+                    mainDirectionalLight.color = new Color(121f / 255f,139f / 255f,190f / 255f);
                     audioManager.setChangingBetweenSongs(true);
                     StartCoroutine(audioManager.changeBackgroundMusic(songNames[1]));
                 }
