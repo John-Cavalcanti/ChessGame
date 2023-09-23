@@ -17,8 +17,7 @@ At first the start of the game with normal lightning and a calm background music
 ![image of beginning of the game](imgsRdm/inicioJogordm.png)
 
 ### Mid game (after 12 plays or so)
-
-Then after some plays the lightning of the game changes to a different color, that could be any sort of animation or anything else but we kept it simple changing the color and the background music.
+Then after some plays, there is an average of 12 play with the usual openings, the lightning of the game changes to a different color, that could be any sort of animation or anything else but we kept it simple changing the color and the background music.
 ![image of the mid game](imgsRdm/MeioDojogordm.png)
 
 ### End of the game (if theres only 7 or less pieces of one of the teams)
