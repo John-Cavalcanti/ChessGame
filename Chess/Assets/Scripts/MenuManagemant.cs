@@ -15,7 +15,7 @@ public class MenuManagemant : MonoBehaviour
 
     private AudioMangement menuAudioManager;
 
-    private void awake()
+    private void Awake()
     {
         if(menuAudioManager == null)
         {
