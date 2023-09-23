@@ -30,6 +30,16 @@ public class NewBehaviourScript : MonoBehaviour
 
     }
 
+    public void onAumentarButton()
+    {
+        audioManager.increaseBackgroundMusicVolume();
+    }
+
+    public void onDiminuirButton()
+    {
+        audioManager.decreaseBackgroundMusicVolume();
+    }
+
     public void onMenuButton()
     {
         SceneManager.LoadScene("Menu");
@@ -53,5 +63,6 @@ public class NewBehaviourScript : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
+
 
 }

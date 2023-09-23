@@ -37,16 +37,23 @@ public class MenuManagemant : MonoBehaviour
         {
             menuAudioManager.stopBackgroundMusic();
         }
-        
-        SceneManager.LoadScene(NomeDoLevelDeJogo);
-    }
 
-    public void onModosButton()
-    {
         ModosScreen.SetActive(true);
         MainScreen.SetActive(false);
 
+        
     }
+
+    public void onMultiButton()
+    {
+        SceneManager.LoadScene(NomeDoLevelDeJogo);
+    }
+
+    public void onIAButton()
+    {
+        ModosScreen.transform.GetChild(0).gameObject.SetActive(true);
+    }
+    
 
     public void onExitButton()
     {
