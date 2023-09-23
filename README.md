@@ -1,5 +1,11 @@
 # Momentum Chess 
 
+## Navigation
+
+[Examples of enviroment changes](#examples-of-enviroment-changes-)<br>
+[Assets](#game-assets-linksin-case-someone-wants)<br>
+[Credits](#credits)
+
 This is a university project, where the initial idea was to develop a Chess game where depending on the current state of the game, or momentum(thats where the game name comes from), we change the enviroment lightning and soundtrack of the game to try providing different emotions on the the situation.
 ![imagem do menu do jogo](imgsRdm/MenuJogo.png)
 
