@@ -21,10 +21,12 @@ In the end there is nothing too especial about the enviroment changes since we h
 The game is entirely made with the unity engine.
 
 
+## Credits 
+The game was made by :
 
-Igor Rafael - 
-João Victor -
-Jorge Junior -
-Raquel Rocha -
-Tales Vinicius -
-Tiago Victor -
+Igor Raphael - irav@cin.ufpe.br 
+João Victor - jvpsc@cin.ufpe.br
+Jorge Junior -  jflj@cin.ufpe.br
+Raquel Rocha - rroc@cin.ufpe.br
+Tales Vinicius - tvac@cin.ufpe.br
+Tiago Victor - tvas@cin.ufpe.br
