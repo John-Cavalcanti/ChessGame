@@ -39,13 +39,13 @@ public class AudioMangement : MonoBehaviour
     public void decreaseBackgroundMusicVolume()
     {
         float volume = backGroundMusicAudioSource.volume;
-        backGroundMusicAudioSource.volume = volume - 1;
+        backGroundMusicAudioSource.volume = volume - 0.2f;
     }
     
     public void increaseBackgroundMusicVolume()
     {
         float volume = backGroundMusicAudioSource.volume;
-        backGroundMusicAudioSource.volume = volume + 1;
+        backGroundMusicAudioSource.volume = volume + 0.2f;
     }
     
     public void setBackgroundMusicVolume(float volume)
