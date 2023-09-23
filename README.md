@@ -43,3 +43,5 @@ Tales Vinicius - tvac@cin.ufpe.br <br>
 ### UX/UI Design
 Raquel Rocha - rroc@cin.ufpe.br <br>
 Tiago Victor - tvas@cin.ufpe.br <br>
+
+[Back to top](#momentum-chess)
