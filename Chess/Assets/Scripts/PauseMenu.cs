@@ -12,6 +12,18 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private GameObject pauseMenuUI;
 
 
+    private void Awake()
+    {
+        if (audioManager == null)
+        {
+            audioManager = FindObjectOfType<AudioMangement>();
+            if (audioManager == null)
+            {
+                Debug.Log("audioManager nulo");
+            }
+        }
+    }
+
     // Update is called once per frame
     private void Update()
     {
@@ -28,6 +40,16 @@ public class NewBehaviourScript : MonoBehaviour
             }
         }
 
+    }
+
+    public void onAumentarButton()
+    {
+        audioManager.increaseBackgroundMusicVolume();
+    }
+
+    public void onDiminuirButton()
+    {
+        audioManager.decreaseBackgroundMusicVolume();
     }
 
     public void onMenuButton()
@@ -53,5 +75,6 @@ public class NewBehaviourScript : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
+
 
 }

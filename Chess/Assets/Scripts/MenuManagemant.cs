@@ -33,20 +33,24 @@ public class MenuManagemant : MonoBehaviour
     // MainScreen bot�es
     public void Jogar()
     {
-        if(menuAudioManager != null)
+        ModosScreen.SetActive(true);
+        MainScreen.SetActive(false);   
+    }
+
+    public void onMultiButton()
+    {
+        if (menuAudioManager != null)
         {
             menuAudioManager.stopBackgroundMusic();
         }
-        
         SceneManager.LoadScene(NomeDoLevelDeJogo);
     }
 
-    public void onModosButton()
+    public void onIAButton()
     {
-        ModosScreen.SetActive(true);
-        MainScreen.SetActive(false);
-
+        ModosScreen.transform.GetChild(0).gameObject.SetActive(true);
     }
+    
 
     public void onExitButton()
     {
