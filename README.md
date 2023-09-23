@@ -5,7 +5,7 @@ This is a university project, where the initial idea was to develop a Chess game
 
 ## Examples of enviroment changes :
 
-### Beginning of the gam
+### Beginning of the game
 At first the start of the game with normal lightning and a calm background music ongoing.
 ![image of beginning of the game](imgsRdm/inicioJogordm.png)
 
@@ -20,13 +20,20 @@ Then after the usual plays and mid game exchanges, there's a moment where starts
 In the end there is nothing too especial about the enviroment changes since we had a limited amount of time to develop ideas and actually develop the game.
 The game is entirely made with the unity engine.
 
+## Game assets links(in case someone wants)
+
+Songs used : https://drive.google.com/drive/folders/1BEmo6z4AGs8eNmTqGqv-eV8Pz3KYAovj?usp=sharing <br>
+3D models : https://www.turbosquid.com/3d-models/3d-chess-2086885 <br>
 
 ## Credits 
 The game was made by :
 
-Igor Raphael - irav@cin.ufpe.br 
-João Victor - jvpsc@cin.ufpe.br
-Jorge Junior -  jflj@cin.ufpe.br
-Raquel Rocha - rroc@cin.ufpe.br
-Tales Vinicius - tvac@cin.ufpe.br
-Tiago Victor - tvas@cin.ufpe.br
+### Coding and Game Logic Planning 
+Igor Raphael - irav@cin.ufpe.br - https://github.com/duckdogersxd <br>
+João Victor - jvpsc@cin.ufpe.br - https://github.com/John-Cavalcanti<br>
+Jorge Junior -  jflj@cin.ufpe.br - https://github.com/jorge-junior<br>
+Tales Vinicius - tvac@cin.ufpe.br <br>
+
+### UX/UI Design
+Raquel Rocha - rroc@cin.ufpe.br <br>
+Tiago Victor - tvas@cin.ufpe.br <br>
