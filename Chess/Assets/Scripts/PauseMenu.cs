@@ -8,6 +8,7 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     private AudioMangement audioManager;
+    public ChessBoard chessboard;
 
     [SerializeField] private GameObject pauseMenuUI;
 
@@ -18,6 +19,15 @@ public class NewBehaviourScript : MonoBehaviour
         {
             audioManager = FindObjectOfType<AudioMangement>();
             if (audioManager == null)
+            {
+                Debug.Log("audioManager nulo");
+            }
+        }
+
+        if (chessboard == null)
+        {
+            chessboard = FindObjectOfType<ChessBoard>();
+            if (chessboard == null)
             {
                 Debug.Log("audioManager nulo");
             }
@@ -65,6 +75,7 @@ public class NewBehaviourScript : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        chessboard.enabled = true;
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -72,6 +83,7 @@ public class NewBehaviourScript : MonoBehaviour
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
+        chessboard.enabled = false;
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
