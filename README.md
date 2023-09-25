@@ -6,7 +6,7 @@
 
 [Exemplos de mudanças de ambiente](#exemplos-de-mudancas-de-ambiente-) <br>
 [Recursos](#links-de-recursos-do-jogo-caso-alguem-queira) <br>
-[Créditos](#creditos)
+[Créditos](#créditos)
 
 Este é um projeto universitário, onde a ideia inicial era desenvolver um jogo de xadrez no qual, dependendo do estado atual do jogo ou do momento (daí vem o nome do jogo), mudamos a iluminação e a trilha sonora do ambiente do jogo para tentar proporcionar diferentes emoções na situação.
 ![Imagem do menu do jogo](imgsRdm/MenuJogo.png)
@@ -55,7 +55,7 @@ Tiago Victor - <tvas@cin.ufpe.br> <br>
 
 ## Navigation
 
-[Examples of enviroment changes](#examples-of-enviroment-changes-) <br>
+[Examples of enviroment changes](#examples-of-enviroment-changes) <br>
 [Assets](#game-assets-linksin-case-someone-wants) <br>
 [Credits](#credits)
 
