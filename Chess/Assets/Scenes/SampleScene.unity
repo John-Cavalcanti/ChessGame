@@ -641,6 +641,7 @@ MonoBehaviour:
   teamMaterials:
   - {fileID: 2100000, guid: ef35495f61ab50f4aa8dabeed1379f44, type: 2}
   - {fileID: 2100000, guid: 1c9e77935c81704419bae7d85cce72ce, type: 2}
+  pauseButton: {fileID: 1162393209}
 --- !u!23 &585378961
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2280,6 +2281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0739e57463d71488a51a21c4146bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chessboard: {fileID: 0}
   pauseMenuUI: {fileID: 78881858}
 --- !u!1 &1344416516
 GameObject:
