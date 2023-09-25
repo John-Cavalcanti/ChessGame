@@ -54,6 +54,7 @@ Raquel Rocha - <rroc@cin.ufpe.br> - <https://github.com/raquelroc> <br>
 Tiago Victor - <tvas@cin.ufpe.br> <br>
 
 # EN-US
+[Portuguese](#pt-br)
 
 ## Navigation
 
