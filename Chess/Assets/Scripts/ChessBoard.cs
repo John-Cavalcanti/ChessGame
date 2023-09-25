@@ -31,7 +31,7 @@ public class ChessBoard : MonoBehaviour
     [SerializeField] private GameObject[] prefabs;
     [SerializeField] private Material[] teamMaterials;
 
-
+    [SerializeField] private GameObject pauseButton;
 
     // Logic
     private ChessPiece[,] chessPieces;
@@ -97,6 +97,12 @@ public class ChessBoard : MonoBehaviour
                 Debug.Log("audioManager nulo");
             }
         }
+
+        if(!pauseButton.activeSelf)
+        {
+            pauseButton.SetActive(true);
+        }
+        
 
         //string initialSongPath = "Audios/" + songNames[0];
 
@@ -415,6 +421,10 @@ public class ChessBoard : MonoBehaviour
 
     private void DisplayVictory(int winningTeam)
     {
+        if(pauseButton.activeSelf)
+        {
+            pauseButton.SetActive(false);
+        }
         VictoryScreen.SetActive(true);
         VictoryScreen.transform.GetChild(winningTeam).gameObject.SetActive(true);
         audioManager.setChangingBetweenSongs(true);
@@ -462,6 +472,8 @@ public class ChessBoard : MonoBehaviour
         SpawnAllPieces();
         PositionAllPieces();
         isWhiteTurn = true;
+        audioManager.setChangingBetweenSongs(true);
+        StartCoroutine(audioManager.changeBackgroundMusic(songNames[0]));
     }
 
     public void onExitButton()
