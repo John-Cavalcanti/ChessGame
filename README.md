@@ -4,8 +4,8 @@
 
 ## Navegação
 
-[Exemplos de mudanças de ambiente](#exemplos-de-mudancas-de-ambiente-) <br>
-[Recursos](#links-de-recursos-do-jogo-caso-alguem-queira) <br>
+[Exemplos de mudanças de ambiente](#exemplos-de-mudanças-de-ambiente) <br>
+[Recursos](#links-dos-recursos-do-jogo-caso-alguém-queira) <br>
 [Créditos](#créditos)
 
 Este é um projeto universitário, onde a ideia inicial era desenvolver um jogo de xadrez no qual, dependendo do estado atual do jogo ou do momento (daí vem o nome do jogo), mudamos a iluminação e a trilha sonora do ambiente do jogo para tentar proporcionar diferentes emoções na situação.
