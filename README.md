@@ -1,5 +1,7 @@
 # Momentum Chess
 
+[English](#en-us)
+
 ## PT-BR
 
 ## Navegação
